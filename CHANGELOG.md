@@ -25,9 +25,6 @@
 ### Added
 * Added contrib/
 * Added data/
-* Added docs/
-* Added docs/Docs.md
-* Added docs/Planning.md
 * Added src/
 * Added src/main.cpp
 * Added src/main.hpp
