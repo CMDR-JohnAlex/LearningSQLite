@@ -8,6 +8,7 @@ int Database::createTable(std::string sql)
 	int exit = sqlite3_exec(db, sql.c_str(), NULL, 0, &messageError);
 	if (exit != SQLITE_OK) {
 		std::cout << "Error in createTable function.\n";
+		std::cout << messageError << '\n';
 		sqlite3_free(messageError);
 	}
 	else
@@ -22,6 +23,7 @@ Database::query_result Database::exec(const std::string& sql)
 	int res = sqlite3_exec(db, sql.c_str(), sqlite_exec_callback, &result, &messageError);
 	if (res != SQLITE_OK) {
 		auto error = std::string{ "sqlite3_exec failed: " } + sqlite3_errstr(res) + ": " + (messageError ? messageError : "");
+		std::cout << messageError << '\n';
 		sqlite3_free(messageError);
 		throw std::runtime_error(error);
 	}
@@ -34,6 +36,7 @@ void Database::exec_void(const std::string& sql)
 	int res = sqlite3_exec(db, sql.c_str(), nullptr, nullptr, &messageError);
 	if (res != SQLITE_OK) {
 		auto error = std::string{ "sqlite3_exec failed: " } + sqlite3_errstr(res) + ": " + (messageError ? messageError : "");
+		std::cout << messageError << '\n';
 		sqlite3_free(messageError);
 		throw std::runtime_error(error);
 	}
